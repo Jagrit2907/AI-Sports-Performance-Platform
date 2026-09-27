@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local/editor files
+.vscode/
+.idea/
+
+# Raw/derived datasets downloaded from external sources
+# Keep the dataset manifest and snapshot metadata in Git.
+data/raw/statsbomb/*.json
+data/raw/statsbomb/**/*.json
+data/processed/**/*
+
+# Allow metadata manifests
+!data/raw/statsbomb/download_snapshot.json

@@ -1,0 +1,48 @@
+{
+  "project": "AI Sports Performance, Talent & Coaching Platform",
+  "version": "v1",
+  "status": "FROZEN_SCOPE",
+  "source": {
+    "provider": "StatsBomb Open Data",
+    "repository": "https://github.com/hudl/open-data",
+    "raw_base": "https://raw.githubusercontent.com/hudl/open-data/master/data",
+    "format": "JSON",
+    "license_note": "Use according to StatsBomb Open Data terms; credit StatsBomb and use their logo when publishing/sharing analysis."
+  },
+  "freeze_policy": {
+    "rule": "The V1 model-training/evaluation population is frozen to the competition-season records below.",
+    "no_silent_updates": true,
+    "future_data": "Any later StatsBomb updates or additional competitions require a new dataset version and must not silently alter V1 experiments."
+  },
+  "scope": {
+    "sport": "football",
+    "gender": "male",
+    "level": "senior",
+    "competition_type": "international tournaments",
+    "seasons": [
+      {"competition_id": 43, "season_id": 3, "competition": "FIFA World Cup", "season": "2018", "expected_matches": 64, "match_360": false},
+      {"competition_id": 43, "season_id": 106, "competition": "FIFA World Cup", "season": "2022", "expected_matches": 64, "match_360": true},
+      {"competition_id": 55, "season_id": 43, "competition": "UEFA Euro", "season": "2020", "expected_matches": 51, "match_360": true},
+      {"competition_id": 55, "season_id": 282, "competition": "UEFA Euro", "season": "2024", "expected_matches": 51, "match_360": true},
+      {"competition_id": 223, "season_id": 282, "competition": "Copa America", "season": "2024", "expected_matches": 32, "match_360": false},
+      {"competition_id": 1267, "season_id": 107, "competition": "African Cup of Nations", "season": "2023", "expected_matches": 52, "match_360": true}
+    ]
+  },
+  "core_files": [
+    "data/competitions.json",
+    "data/matches/{competition_id}/{season_id}.json",
+    "data/events/{match_id}.json",
+    "data/lineups/{match_id}.json"
+  ],
+  "optional_files": [
+    "data/three-sixty/{match_id}.json"
+  ],
+  "important_limitations": [
+    "This is an international-tournament dataset, not a worldwide club-league database.",
+    "Player observations are affected by national-team selection and tournament minutes.",
+    "360 data is available only for selected competitions/seasons; V1 core features must not require 360 coverage.",
+    "The dataset does not provide a validated future-success target, so V1 talent identification is a statistical shortlist, not a future-career predictor.",
+    "Physical performance metrics such as true running speed, acceleration, and distance are not available as direct player-tracking measurements in the core event data.",
+    "Longitudinal analysis is valid only for players with repeated observations across comparable tournaments; sparse or incomparable cases will be marked accordingly."
+  ]
+}
