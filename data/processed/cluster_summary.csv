@@ -1,0 +1,4 @@
+cluster,goals_per90,xg_per90,shots_per90,passes_per90,completed_passes_per90,pass_completion_pct,carries_per90,carry_distance_per90,completed_dribbles_per90,pressures_per90,tackles_per90,interceptions_per90,clearances_per90,blocks_per90,ball_recoveries_per90,shot_assists_per90,goal_assists_per90,through_balls_per90,crosses_per90
+0,0.06,0.07,0.64,49.35,41.89,83.96,37.83,206.32,0.44,12.24,1.72,1.14,2.57,1.84,3.64,0.52,0.05,0.14,0.84
+1,0.29,0.28,2.08,30.32,23.03,74.7,29.01,193.3,1.24,15.78,1.1,0.54,0.57,1.34,3.6,1.12,0.13,0.21,1.53
+2,0.01,0.01,0.03,27.09,18.91,69.24,14.15,72.6,0.03,0.76,0.08,0.07,0.34,0.14,3.64,0.03,0.0,0.01,0.01
