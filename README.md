@@ -1,5 +1,9 @@
 AI Sports Performance, Talent & Coaching Platform
 
+## 🚀 Live Demo
+
+[**Open the Football Analytics Dashboard →**](https://ai-sports-performance-platform-eyl3yz4pdgt5jww7dpvz4n.streamlit.app/)
+
 A football analytics platform built with real match event data to analyze player performance, compare player profiles, explore player archetypes, and generate simple development insights.
 
 Current Version: V1 — Football Analytics
