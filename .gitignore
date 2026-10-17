@@ -6,7 +6,8 @@ venv/
 
 # Jupyter
 .ipynb_checkpoints/
-
+notebooks/
+*.ipynb
 # Local/editor files
 .vscode/
 .idea/

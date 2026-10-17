@@ -55,7 +55,79 @@ DIMENSIONS = {
         "crosses_per90",
     ],
 }
+ROLE_WEIGHTS = {
+    "Forward": {
+        "attacking_score": 0.50,
+        "passing_score": 0.10,
+        "progression_score": 0.15,
+        "defensive_score": 0.05,
+        "creativity_score": 0.20,
+    },
 
+    "Winger": {
+        "attacking_score": 0.30,
+        "passing_score": 0.18,
+        "progression_score": 0.25,
+        "defensive_score": 0.05,
+        "creativity_score": 0.22,
+    },
+
+    "Attacking Midfielder": {
+        "attacking_score": 0.20,
+        "passing_score": 0.20,
+        "progression_score": 0.25,
+        "defensive_score": 0.10,
+        "creativity_score": 0.25,
+    },
+
+    "Midfielder": {
+        "attacking_score": 0.15,
+        "passing_score": 0.25,
+        "progression_score": 0.25,
+        "defensive_score": 0.15,
+        "creativity_score": 0.20,
+    },
+
+    "Defensive Midfielder": {
+        "attacking_score": 0.10,
+        "passing_score": 0.25,
+        "progression_score": 0.20,
+        "defensive_score": 0.35,
+        "creativity_score": 0.10,
+    },
+
+    "Full Back": {
+        "attacking_score": 0.10,
+        "passing_score": 0.20,
+        "progression_score": 0.20,
+        "defensive_score": 0.35,
+        "creativity_score": 0.15,
+    },
+
+    "Centre Back": {
+        "attacking_score": 0.05,
+        "passing_score": 0.20,
+        "progression_score": 0.10,
+        "defensive_score": 0.55,
+        "creativity_score": 0.10,
+    },
+
+    "Goalkeeper": {
+        "attacking_score": 0.00,
+        "passing_score": 0.40,
+        "progression_score": 0.10,
+        "defensive_score": 0.45,
+        "creativity_score": 0.05,
+    },
+
+    "Unknown": {
+        "attacking_score": 0.20,
+        "passing_score": 0.20,
+        "progression_score": 0.20,
+        "defensive_score": 0.20,
+        "creativity_score": 0.20,
+    },
+}
 
 def main():
 
@@ -104,21 +176,54 @@ def main():
     # -----------------------------------------------------
 
     score_columns = [
-        "attacking_score",
-        "passing_score",
-        "progression_score",
-        "defensive_score",
-        "creativity_score",
+    "attacking_score",
+    "passing_score",
+    "progression_score",
+    "defensive_score",
+    "creativity_score",
     ]
 
-    df["overall_score"] = (
-        df[score_columns]
-        .mean(axis=1)
+
+    def calculate_overall_score(row):
+        weights = ROLE_WEIGHTS[row["position_group"]]
+
+        return sum(
+             row[column] * weight
+             for column, weight in weights.items()
     )
 
-    # Round scores for easier reading.
-    df[score_columns + ["overall_score"]] = (
-        df[score_columns + ["overall_score"]]
+
+    df["role_performance_score"] = df.apply(
+        calculate_overall_score,
+        axis=1
+    )
+
+    df["minutes_score"] = (
+        df.groupby("position_group")["minutes_played"]
+        .rank(pct=True) * 100
+    )
+
+    df["overall_score"] = (
+        0.90 * df["role_performance_score"]
+        + 0.10 * df["minutes_score"]
+    )
+
+    df[
+        score_columns
+        + [
+            "role_performance_score",
+            "minutes_score",
+            "overall_score",
+        ]
+    ] = (
+        df[
+            score_columns
+            + [
+                "role_performance_score",
+                "minutes_score",
+                "overall_score",
+            ]
+        ]
         .round(2)
     )
 
@@ -139,13 +244,16 @@ def main():
     print(
         df[
             [
-                "player_name",
+                               "player_name",
                 "position_group",
+                "minutes_played",
                 "attacking_score",
                 "passing_score",
                 "progression_score",
                 "defensive_score",
                 "creativity_score",
+                "role_performance_score",
+                "minutes_score",
                 "overall_score",
             ]
         ]
@@ -159,4 +267,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()      

@@ -116,6 +116,7 @@ def main():
         "player_name",
         "position_group",
         "minutes_played",
+        "role_performance_score",
         "overall_score",
         "attacking_score",
         "passing_score",

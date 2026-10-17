@@ -75,10 +75,10 @@ with profile_tab:
     st.subheader(player_name)
 
     # -----------------------------------------------------
-    # Basic information
+    # Basic information and scores
     # -----------------------------------------------------
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     col1.metric(
         "Position",
@@ -86,13 +86,25 @@ with profile_tab:
     )
 
     col2.metric(
-        "Minutes",
+        "Minutes Played",
         f"{player['minutes_played']:.0f}"
     )
 
     col3.metric(
+        "Role Performance",
+        f"{player['role_performance_score']:.2f}"
+    )
+
+    col4.metric(
         "Overall Score",
-        f"{player['overall_score']:.1f}"
+        f"{player['overall_score']:.2f}"
+    )
+
+    st.caption(
+        "Overall Score = 90% Role Performance + "
+        "10% Playing-Time Percentile. "
+        "Playing time represents sample strength, "
+        "not match-to-match consistency."
     )
 
     # -----------------------------------------------------
@@ -241,6 +253,7 @@ with talent_tab:
             "player_name",
             "position_group",
             "minutes_played",
+            "role_performance_score",
             "overall_score"
         ]
     ]
@@ -250,6 +263,7 @@ with talent_tab:
             "player_name": "Player",
             "position_group": "Position",
             "minutes_played": "Minutes",
+            "role_performance_score": "Role Performance",
             "overall_score": "Overall Score"
         }
     )
